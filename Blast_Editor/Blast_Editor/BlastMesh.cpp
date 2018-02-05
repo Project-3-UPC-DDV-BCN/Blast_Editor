@@ -27,7 +27,6 @@ BlastMesh::~BlastMesh()
 	RELEASE_ARRAY(vertices);
 
 	UnloadFromMemory();
-	blast_mesh->release();
 }
 
 void BlastMesh::LoadToMemory()

@@ -9,6 +9,7 @@
 #include "Nvidia/Blast/Include/extensions/serialization/NvBlastExtPxSerialization.h"
 #include "Nvidia/Blast/Include/extensions/serialization/NvBlastExtSerialization.h"
 #include "Nvidia/Blast/Include/extensions/serialization/NvBlastExtTkSerialization.h"
+#include "Nvidia/Blast/Include/extensions/exporter/NvBlastExtExporter.h"
 #include "BlastMesh.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
@@ -16,6 +17,9 @@
 #include "Material.h"
 #include "ComponentTransform.h"
 #include <fstream>
+
+#define WIN32_MEAN_AND_LEAN
+#include "windows.h"
 
 #pragma comment (lib, "Nvidia/Blast/lib/NvBlastDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtAuthoringDEBUG_x86.lib")
@@ -25,6 +29,7 @@
 #pragma comment (lib, "Nvidia/Blast/lib/NvBlastGlobalsDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtPhysXDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtTkSerializationDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtExporterDEBUG_x86.lib")
 
 #pragma comment (lib, "Nvidia/PhysX/libx86/Debug/PhysX3DEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/Debug/PhysX3CommonDEBUG_x86.lib")
@@ -122,7 +127,7 @@ bool ModuleBlast::CleanUp()
 	}
 	delete blast_random_generator;
 	blast_random_generator = nullptr;
-	for (std::vector<BlastMesh*>::iterator it = blast_meshes.begin(); it != blast_meshes.end(); it++)
+	for (std::vector<BlastMesh*>::iterator it = blast_meshes.begin(); it != blast_meshes.end();)
 	{
 		(*it)->blast_mesh->release();
 		delete *it;
@@ -702,17 +707,22 @@ void ModuleBlast::CreateBlastFile()
 		NvBlastExtPxSerializerLoadSet(*framework, *physx_physics, *cooking, *serialization);
 		serialization->setSerializationEncoding(NVBLAST_FOURCC('C', 'P', 'N', 'B'));
 	}
+	CreateDirectory("./Wall", NULL);
 	const uint64_t buffer_size = NvBlastExtSerializationSerializeExtPxAssetIntoBuffer(buffer, *serialization, physicsAsset);
-	if (buffer_size == 0)
+	if (buffer_size != 0)
 	{
-		int i = 0;
-	}
-	else
-	{
-		std::ofstream outfile("./ejjreve.bmesh", std::ofstream::binary);
+		std::ofstream outfile("./Wall/wall.bmesh", std::ofstream::binary);
 		outfile.write((char*)buffer, buffer_size);
 		outfile.close();
-		gDefaultAllocatorCallback.deallocate(buffer);
+	}
+
+	Nv::Blast::IMeshFileWriter* mesh_exporter = NvBlastExtExporterCreateFbxFileWriter();
+
+	if (mesh_exporter)
+	{
+		mesh_exporter->appendMesh(*authoring_result, "wall");
+		mesh_exporter->saveToFile("wall_blast", "./Wall/");
+		mesh_exporter->release();
 	}
 }
 
