@@ -31,11 +31,11 @@
 #pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtTkSerializationDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtExporterDEBUG_x86.lib")
 
-#pragma comment (lib, "Nvidia/PhysX/libx86/Debug/PhysX3DEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/PhysX/libx86/Debug/PhysX3CommonDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/PhysX/libx86/Debug/PxFoundationDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/PhysX/libx86/Debug/PhysX3CookingDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/PhysX/libx86/Debug/PhysX3ExtensionsDEBUG.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3DEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3CommonDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PxFoundationDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3CookingDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3ExtensionsDEBUG.lib")
 
 
 ModuleBlast::ModuleBlast(Application* app) : Module(app)
