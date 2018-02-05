@@ -305,7 +305,7 @@ update_status ModuleEditor::Update(float deltaTime)
 		ImGui::Text("Slices Y:");
 		if (ImGui::DragInt("##Slices Y", &slicing_Y))
 		{
-			App->blast->SetSlicingX(slicing_Y);
+			App->blast->SetSlicingY(slicing_Y);
 		}
 		int slicing_Z = App->blast->GetSlicingZ();
 		ImGui::Text("Slices Z:");

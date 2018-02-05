@@ -21,21 +21,38 @@
 #define WIN32_MEAN_AND_LEAN
 #include "windows.h"
 
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtAuthoringDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtPxSerializationDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtSerializationDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastTkDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastGlobalsDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtPhysXDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtTkSerializationDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/Blast/lib/NvBlastExtExporterDEBUG_x86.lib")
+#if _DEBUG
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastExtAuthoringDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastExtPxSerializationDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastExtSerializationDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastTkDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastGlobalsDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastExtPhysXDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastExtTkSerializationDEBUG_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_debug/NvBlastExtExporterDEBUG_x86.lib")
 
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3DEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3CommonDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PxFoundationDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3CookingDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3ExtensionsDEBUG.lib")
+//#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3ExtensionsDEBUG.lib")
+#else
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlast_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastExtAuthoring_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastExtPxSerialization_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastExtSerialization_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastTk_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastGlobals_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastExtPhysX_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastExtTkSerialization_x86.lib")
+#pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastExtExporter_x86.lib")
+
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3_x86.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Common_x86.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PxFoundation_x86.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Cooking_x86.lib")
+#endif
 
 
 ModuleBlast::ModuleBlast(Application* app) : Module(app)
