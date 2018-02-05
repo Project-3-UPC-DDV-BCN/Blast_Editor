@@ -36,7 +36,7 @@
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3CommonDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PxFoundationDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3CookingDEBUG_x86.lib")
-//#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3ExtensionsDEBUG.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3ExtensionsDEBUG.lib")
 #else
 #pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlast_x86.lib")
 #pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastExtAuthoring_x86.lib")
@@ -52,6 +52,7 @@
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Common_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PxFoundation_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Cooking_x86.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Extensions.lib")
 #endif
 
 

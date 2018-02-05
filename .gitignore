@@ -24,6 +24,9 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+!Blast_Editor/dlls/*
+!Blast_Editor/Blast_Editor/SDL2-2.0.7/lib/*
+
 # Visual Studio 2015 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
