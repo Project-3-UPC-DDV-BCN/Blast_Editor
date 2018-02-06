@@ -170,7 +170,7 @@ void ModuleBlast::CreateBlastMesh(float* vertices, uint num_vertices, float* nor
 	blast_meshes.back()->mesh_transform->SetParentTransform(parent_transform);
 	blast_meshes.back()->mesh_transform->SetPosition(mesh_pos);
 	blast_meshes.back()->mesh_transform->SetRotation(mesh_rot);
-	blast_meshes.back()->mesh_transform->SetScale(mesh_scale);
+	blast_meshes.back()->mesh_transform->SetScale({ 1,1,1 });
 }
 
 void ModuleBlast::UpdateMesh()
@@ -299,29 +299,39 @@ void ModuleBlast::ApplyFracture()
 {
 	if (voronoi_sites_generator) voronoi_sites_generator->release();
 	voronoi_sites_generator = NvBlastExtAuthoringCreateVoronoiSitesGenerator(current_selected_mesh->blast_mesh, blast_random_generator);
+	bool fractured = false;
 
 	switch (fracture_type)
 	{
 	case ModuleBlast::VoronoiUniform:
-		ApplyVoronoiFracture();
+		fractured = ApplyVoronoiFracture();
 		break;
 	case ModuleBlast::VoronoiClustered:
-		ApplyVoronoiClusteredFracture();
+		fractured = ApplyVoronoiClusteredFracture();
 		break;
 	case ModuleBlast::VoronoiRadial:
-		ApplyVoronoiRadialFracture();
+		fractured = ApplyVoronoiRadialFracture();
 		break;
 	case ModuleBlast::VoronoiInSphere:
-		ApplyVoronoiInSphereFracture();
+		fractured = ApplyVoronoiInSphereFracture();
 		break;
 	case ModuleBlast::VoronoiRemove:
-		RemoveInSphereFracture();
+		fractured = RemoveInSphereFracture();
 		break;
 	case ModuleBlast::Slice:
-		ApplySliceFracture();
+		fractured = ApplySliceFracture();
 		break;
 	default:
 		break;
+	}
+
+	if (fractured)
+	{
+		if (explosion_amount < 0.2)
+		{
+			explosion_amount += 0.2;
+			App->renderer3D->SetExplosionDisplacement(explosion_amount);
+		}
 	}
 }
 
@@ -329,6 +339,7 @@ void ModuleBlast::ResetMesh()
 {
 	fract_tool->reset();
 	DeleteChilds(blast_meshes.front());
+	blast_meshes.front()->is_root = false;
 }
 
 void ModuleBlast::OptimizeChunks()
