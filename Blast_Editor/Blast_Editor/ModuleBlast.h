@@ -2,7 +2,7 @@
 
 #include "Module.h"
 #include <vector>
-#include "Nvidia/Blast/Include/extensions/authoring/NvBlastExtAuthoringTypes.h"
+#include "Nvidia/Blast/Include/extensions/authoring/Include/NvBlastExtAuthoringTypes.h"
 #include "Nvidia/PhysX/Include/PxPhysicsAPI.h"
 #include "Math/float3.h"
 #include <string>
