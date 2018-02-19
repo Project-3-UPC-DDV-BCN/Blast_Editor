@@ -4,7 +4,7 @@
 #include "ModuleMeshImporter.h"
 #include "ModuleRenderer3D.h"
 #include "ComponentTransform.h"
-#include "Nvidia/Blast/Include/extensions/authoring/NvBlastExtAuthoringMesh.h"
+#include "Nvidia/Blast/Include/extensions/authoring/Include/NvBlastExtAuthoringMesh.h"
 
 BlastMesh::BlastMesh()
 {

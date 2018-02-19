@@ -36,7 +36,7 @@
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3CommonDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PxFoundationDEBUG_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3CookingDEBUG_x86.lib")
-#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3ExtensionsDEBUG.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_debug/PhysX3ExtensionsDEBUG_x86.lib")
 #else
 #pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlast_x86.lib")
 #pragma comment (lib, "Nvidia/Blast/lib/lib_release/NvBlastExtAuthoring_x86.lib")
@@ -52,7 +52,7 @@
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Common_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PxFoundation_x86.lib")
 #pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Cooking_x86.lib")
-#pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Extensions.lib")
+#pragma comment (lib, "Nvidia/PhysX/libx86/lib_release/PhysX3Extensions_x86.lib")
 #endif
 
 
@@ -419,12 +419,12 @@ bool ModuleBlast::RemoveInSphereFracture()
 bool ModuleBlast::ApplySliceFracture()
 {
 	Nv::Blast::SlicingConfiguration config;
+	config.noise.amplitude = slicing_noise_amplitude;
+	config.noise.frequency = slicing_noise_frquency;
+	config.noise.octaveNumber = slicing_noise_octave_number;
+	config.noise.surfaceResolution = slicing_surface_resolution;
 	config.angle_variations = slicing_angle_variation;
-	config.noiseAmplitude = slicing_noise_amplitude;
-	config.noiseFrequency = slicing_noise_frquency;
-	config.noiseOctaveNumber = slicing_noise_octave_number;
 	config.offset_variations = slicing_offset_variations;
-	config.surfaceResolution = slicing_surface_resolution;
 	config.x_slices = slicing_x_slices;
 	config.y_slices = slicing_y_slices;
 	config.z_slices = slicing_z_slices;
@@ -749,9 +749,20 @@ void ModuleBlast::CreateBlastFile()
 
 	if (mesh_exporter)
 	{
+		//mesh_exporter->setInteriorIndex(1);
 		mesh_exporter->appendMesh(*authoring_result, "wall");
 		mesh_exporter->saveToFile("wall_blast", "./Wall/");
 		mesh_exporter->release();
+	}
+
+	Nv::Blast::IMeshFileWriter* mesh_exporter2 = NvBlastExtExporterCreateObjFileWriter();
+
+	if (mesh_exporter2)
+	{
+		//mesh_exporter2->setInteriorIndex(1);
+		mesh_exporter2->appendMesh(*authoring_result, "wall");
+		mesh_exporter2->saveToFile("wall_blast", "./Wall/");
+		mesh_exporter2->release();
 	}
 }
 
